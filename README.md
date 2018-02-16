@@ -3,7 +3,7 @@
 Simple NSPopover Example which shows how to create a macOS application as a menu bar popup message.<br>
 Like that:
 
-![alt tag](https://raw.github.com/maximbilan/Mac-OS-X-App-Menu-Bar-Popup/master/screenshots/1.png)
+![alt tag](https://raw.githubusercontent.com/GrafixMafia/Mac-OS-X-App-Menu-Bar-Popup/master/screenshots/1.png)
 
 And example of <i>AppDelegate</i>:
 

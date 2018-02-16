@@ -1,42 +1,9 @@
 # Mac OS X Application like a menu bar popup message
 
-Simple tutorial which explains how to create Mac OS X application as a menu bar popup message.<br>
+Simple NSPopover Example which shows how to create a macOS application as a menu bar popup message.<br>
 Like that:
 
 ![alt tag](https://raw.github.com/maximbilan/Mac-OS-X-App-Menu-Bar-Popup/master/screenshots/1.png)
-
-For that, we need to create <i>EventMonitor</i> class for handling monitor events.
-
-<pre>
-import Cocoa
-
-open class EventMonitor {
-	
-	fileprivate var monitor: AnyObject?
-	fileprivate let mask: NSEventMask
-	fileprivate let handler: (NSEvent?) -> ()
-	
-	public init(mask: NSEventMask, handler: @escaping (NSEvent?) -> ()) {
-		self.mask = mask
-		self.handler = handler
-	}
-	
-	deinit {
-		stop()
-	}
-	
-	open func start() {
-		monitor = NSEvent.addGlobalMonitorForEvents(matching: mask, handler: handler) as AnyObject?
-	}
-	
-	open func stop() {
-		if monitor != nil {
-			NSEvent.removeMonitor(monitor!)
-			monitor = nil
-		}
-	}
-}
-</pre>
 
 And example of <i>AppDelegate</i>:
 
@@ -95,6 +62,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 </pre>
 
-It’s really simple and I think no sense to describe details, just see the code.
-
 Full code of this example you can find in this repository.
+Simplified version of https://github.com/maximbilan/Mac-OS-X-App-Menu-Bar-Popup

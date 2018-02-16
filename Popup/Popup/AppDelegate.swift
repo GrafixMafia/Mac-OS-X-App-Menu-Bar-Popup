@@ -13,8 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 	let popover = NSPopover()
-	var eventMonitor: EventMonitor?
-
+	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		
 		if let button = statusItem.button {
@@ -24,16 +23,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		let mainViewController = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "ViewControllerId")) as! ViewController
 		
+        popover.behavior = NSPopover.Behavior.transient
 		popover.contentViewController = mainViewController
 		
-		eventMonitor = EventMonitor(mask: [NSEvent.EventTypeMask.leftMouseDown, NSEvent.EventTypeMask.rightMouseDown]) { [weak self] event in
-			if let popover = self?.popover {
-				if popover.isShown {
-					self?.closePopover(event)
-				}
-			}
-		}
-		eventMonitor?.start()
+		
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {
@@ -50,13 +43,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func showPopover(_ sender: AnyObject?) {
 		if let button = statusItem.button {
 			popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
-			eventMonitor?.start()
 		}
 	}
 	
 	func closePopover(_ sender: AnyObject?) {
 		popover.performClose(sender)
-		eventMonitor?.stop()
 	}
 
 }
